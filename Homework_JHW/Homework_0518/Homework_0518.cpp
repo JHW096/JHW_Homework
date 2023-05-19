@@ -1,6 +1,6 @@
 ﻿#include<iostream>
 using namespace std;
-
+//test
 int StringCount(char* _Arr)
 {
 	if (_Arr == nullptr)
