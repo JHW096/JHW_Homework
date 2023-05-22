@@ -137,7 +137,7 @@ int main()
     {
         //4가 리턴되어야 합니다.
         int Result = ChCount("ab aaa ccc ddd eee", 'a');
-        cout << Result << endl;
+        std::cout << Result << std::endl;
     }
         
 

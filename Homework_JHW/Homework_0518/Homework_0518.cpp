@@ -3,6 +3,9 @@ using namespace std;
 //test
 int StringCount(char* _Arr)
 {
+	/*
+		단순히 숫자만 세어주는 함수라서 const char* 가 더 좋을듯.
+	*/
 	if (_Arr == nullptr)
 	{
 		return 0;
@@ -54,6 +57,11 @@ void ChangeCh(char* _Arr, char _PrevCh, char _NextCh)
 		4. _Arr의 자료형은 Char* 임으로, ++연산을 할 시 sizeof(char)값 만큼 주소를 증가시킨다.
 		   (_Arr의 주소가 100번지라고 가정하면, ++_Arr를 할 경우, while문이 끝날때까지 주소값을 1씩 증가시킨다. )
 	*/
+	/*
+		//Tip
+S		함수 Parameter에 const를 붙이고, 향후 바꿔야 한다면 const를
+		지우는 방식으로 함수 작성.
+	*/
 }
 
 void ChangeCh2(char* _Arr, char _PrevCh, char _NextCh)
@@ -89,3 +97,9 @@ int main(void)
 	* ChageCh = aaa bbb ddd'
 	*/
 }
+
+/*
+	Solve
+
+
+*/
