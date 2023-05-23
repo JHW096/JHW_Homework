@@ -28,6 +28,12 @@ int GetStringSize(const char* const _Name)
 
 void StatusRender(const char* const _Name, int _Att, int _Hp)
 {
+    /*
+        addtional solution.
+        const int LINECOUNT = 40;
+        을 전역변수로 두면 향후 다른 UI를 교체시 도움이 될 것.
+    */
+
     if (_Name == nullptr)
     {
         printf_s("이름을 만들어 주세요.\n");
@@ -41,7 +47,7 @@ void StatusRender(const char* const _Name, int _Att, int _Hp)
     }
 
     printf_s("%s", _Name);
-    for (int i = _NameSize; i < 40; ++i)
+    for (int i = _NameSize; i < 40; ++i) //LINECOUNT - _NameSize; ++i
     {
         printf_s("-");
     }
@@ -51,7 +57,7 @@ void StatusRender(const char* const _Name, int _Att, int _Hp)
     printf_s("체  력 : %d\n", _Hp);
 
     printf_s("----------------------------------------\n");
-
+    
 }
 
 void DamagePrint(const char* const _AttName, const char* const _DefName, int _Att)
@@ -124,6 +130,9 @@ int main()
         }
 
     }
+
+
+
 
 
 }
