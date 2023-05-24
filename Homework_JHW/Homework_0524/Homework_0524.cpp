@@ -5,7 +5,14 @@
 
 const int XLine = 20;
 const int YLine = 10;
-
+/*
+    나의 구성안.
+    if,
+    Player.Pos.x > 20 || Player.Pos.y > 10
+    Player.Pos.x += 0;
+    Player.Pos.y += 0;
+    이런식으로 만들 예정.
+*/
 
 // 이녀석은 캡슐화된 클래스라기 보다는 기본자료형
 class int4
