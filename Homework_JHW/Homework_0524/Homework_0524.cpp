@@ -1,12 +1,12 @@
 ﻿#include <iostream>
 #include <conio.h>
 
-// 숙제 플레이어가 화면 바깥으로 나가지 못하게 해라.
+//1. Homework - 숙제 플레이어가 화면 바깥으로 나가지 못하게 해라.
 
 const int XLine = 20;
 const int YLine = 10;
 /*
-    나의 구성안.
+    My 수도코드.
     if,
     Player.Pos.x > 20 || Player.Pos.y > 10
     Player.Pos.x += 0;
@@ -14,7 +14,6 @@ const int YLine = 10;
     이런식으로 만들 예정.
 */
 
-// 이녀석은 캡슐화된 클래스라기 보다는 기본자료형
 class int4
 {
 public:
@@ -41,16 +40,11 @@ public:
 
 };
 
-// 리스 이니셜라이저
 const int4 Left = { -1, 0 };
 const int4 Right = { 1, 0 };
 const int4 Up = { 0, -1 };
 const int4 Down = { 0, 1 };
-
-// Init('*')
-
-// [*][*][0] \n
-// [*][*][0] \n
+const int4 Zero = { };
 
 class ConsoleScreen
 {
@@ -105,15 +99,7 @@ private:
 class Player
 {
 public:
-    // 레퍼런스는 기본적으로 8바이트 참조입니다.
-    // int4를 그냥 16바이트입니다.
-    // int4&를 그냥 8바이트입니다.
-    // int4*를 그냥 8바이트입니다.
-
-    // 내가 넣으려는 인자가 합쳐서 8바이트가 넘어갈때
-    // 그걸 구조체나 클래스로 묶어서 참조형태로 넘기는게 대부분의 상황에서
-    // 무조건 이득이다.
-
+   
     int4 GetPos()
     {
         return Pos;
@@ -124,12 +110,10 @@ public:
         Pos += _Pos;
     }
 
+    
 
     void SetPos(const int4& _Pos)
     {
-        // 뭔가가 그냥 거저 된다.
-        // => 내가 만들었다.
-        // => 컴파일러나 기본문법으로 생략되어 있다.
         Pos = _Pos;
     }
 
@@ -166,20 +150,8 @@ public:
 protected:
 
 private:
-
-
-
     int4 Pos;
 };
-
-// 기계어적으로 볼때 함수가 호출되고 함수의 메모리를 만들고
-// 메모리를 정리하는 담당자를 정해야하는 규칙이 있는데.
-// C++에서는 그걸 직접 정해줄수 있는 문법이 또 있는거야.
-// 컴파일러가 가장 최적의 함수호출규약을 알아서 정해줍니다.
-void /*__cdecl*/ Function()
-{
-
-}
 
 int main()
 {
@@ -187,7 +159,6 @@ int main()
     Screen.Init('*');
 
     Player MainPlayer;
-    // 클래스의경우에는 
     MainPlayer.SetPos({ 10, 5 });
 
     while (true)
