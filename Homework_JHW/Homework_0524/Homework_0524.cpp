@@ -131,15 +131,37 @@ public:
         switch (Select)
         {
         case 'a':
+        {
+            if (Pos.X < 0 || Pos.X > XLine)
+            {
+                AddPos(Zero);
+            }
             AddPos(Left);
             break;
+        }
         case 'd':
-            AddPos(Right);
+            if (Pos.X < 0 || Pos.X > XLine)
+            {
+                AddPos(Zero);
+            }
+            AddPos(Left);
             break;
         case 'w':
+            if (Pos.Y < 0 || Pos.Y > YLine)
+            {
+                AddPos(Zero);
+            }
+            AddPos(Left);
+            break;
             AddPos(Up);
             break;
         case 's':
+            if (Pos.Y < 0 || Pos.Y > YLine)
+            {
+                AddPos(Zero);
+            }
+            AddPos(Left);
+            break;
             AddPos(Down);
             break;
         default:
