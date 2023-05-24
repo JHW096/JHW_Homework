@@ -40,8 +40,8 @@ void TestFunction(Player _Newplayer, int _Test)
 
         if Player has over 8byte Variables (int, int, int)
         Result
-        Address0 =
-        Address1 =
+        Address0 = ex) 0
+        Address1 = ex) -520
     */
     int a = 0; // break point
 }
@@ -88,3 +88,16 @@ int main()
 
 }
 
+/*
+    Additional Comment.
+    1. Virtual Address.
+    Address를 확인할 때, Ram의 진짜 위치를 알려주지 않는다.
+    이때 보이는 주소는 가상주소(Virtual Address)이다.
+    BCuz 진짜 Ram의 위치를 조정할 수 있다면,
+    다른 프로그램 또는 프로세스를 간섭할 수 있기 때문이다.
+
+    Physical Address <=> Virtual Address
+
+    객체의 메모리와 함수의 Parameter의 메모리를 분리해서 처리한다.
+
+*/
