@@ -1,18 +1,10 @@
-﻿#include <iostream>
+﻿#include<iostream>
 #include <conio.h>
 
 //1. Homework - 숙제 플레이어가 화면 바깥으로 나가지 못하게 해라.
 
 const int XLine = 20;
 const int YLine = 10;
-/*
-    My 수도코드.
-    if,
-    Player.Pos.x > 20 || Player.Pos.y > 10
-    Player.Pos.x += 0;
-    Player.Pos.y += 0;
-    이런식으로 만들 예정.
-*/
 
 class int4
 {
@@ -44,7 +36,7 @@ const int4 Left = { -1, 0 };
 const int4 Right = { 1, 0 };
 const int4 Up = { 0, -1 };
 const int4 Down = { 0, 1 };
-const int4 Zero = { };
+const int4 Zero = { 0, 0 };
 
 class ConsoleScreen
 {
@@ -99,7 +91,7 @@ private:
 class Player
 {
 public:
-   
+
     int4 GetPos()
     {
         return Pos;
@@ -110,7 +102,7 @@ public:
         Pos += _Pos;
     }
 
-    
+
 
     void SetPos(const int4& _Pos)
     {
@@ -130,42 +122,58 @@ public:
 
         switch (Select)
         {
-        case 'a':
-        {
-            if (Pos.X < 0 || Pos.X > XLine)
+            case 'a':
             {
-                AddPos(Zero);
+                if (Pos.X <= 0)
+                {
+                    AddPos(Zero);
+                }
+                else
+                {
+                    AddPos(Left);
+                }
+                break;
             }
-            AddPos(Left);
-            break;
-        }
-        case 'd':
-            if (Pos.X < 0 || Pos.X > XLine)
+            case 'd':
             {
-                AddPos(Zero);
+                if (Pos.X > XLine - 2)
+                {
+                    AddPos(Zero);
+                }
+                else
+                {
+                    AddPos(Right);
+                }
+                break;
             }
-            AddPos(Left);
-            break;
-        case 'w':
-            if (Pos.Y < 0 || Pos.Y > YLine)
+            case 'w':
             {
-                AddPos(Zero);
+                if (Pos.Y <= 0)
+                {
+                    AddPos(Zero);
+                }
+                else
+                {
+                    AddPos(Up);
+                }
+                break;
             }
-            AddPos(Left);
-            break;
-            AddPos(Up);
-            break;
-        case 's':
-            if (Pos.Y < 0 || Pos.Y > YLine)
+            case 's':
             {
-                AddPos(Zero);
+                if (Pos.Y > YLine - 2)
+                {
+                    AddPos(Zero);
+                }
+                else
+                {
+                    AddPos(Down);
+                }
+                break;
             }
-            AddPos(Left);
-            break;
-            AddPos(Down);
-            break;
-        default:
-            break;
+            default:
+            {
+                break;
+            }
         }
     }
 
