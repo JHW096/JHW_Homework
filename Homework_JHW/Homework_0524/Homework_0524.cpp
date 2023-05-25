@@ -30,6 +30,17 @@ public:
         W += _Other.W;
     }
 
+    int4 operator+(const int4& _Other)
+    {
+        int4 Return;
+        Return.X = X + _Other.X;
+        Return.Y = Y + _Other.Y;
+        Return.Z = Z + _Other.Z;
+        Return.W = W + _Other.W;
+
+        return Return;
+    }
+
 };
 
 const int4 Left = { -1, 0 };
@@ -78,6 +89,32 @@ public:
             printf_s(ArrScreen[y]);
             printf_s("\n");
         }
+    }
+
+    //Add teacher solution
+    bool IsScreenOut(const int4& _Pos)
+    {
+        if (_Pos.X < 0)
+        {
+            return true;
+        }
+
+        if (_Pos.Y < 0)
+        {
+            return true;
+        }
+
+        if (XLine <= _Pos.X)
+        {
+            return true;
+        }
+
+        if (YLine <= _Pos.Y)
+        {
+            return true;
+        }
+
+        return false;
     }
 
 protected:
@@ -176,6 +213,59 @@ public:
             }
         }
     }
+
+#pragma region Teacher_Solution
+
+    void Input(ConsoleScreen* _Screen)
+    {
+        char Select = (char)_getch();
+
+        //add move { 0, 0 };
+
+        switch (Select)
+        {
+        case 'a':
+        {
+            if (false == _Screen->IsScreenOut(GetPos() + Left))
+            {
+                AddPos(Left);
+            }
+            break;
+        }
+        case 'd':
+        {
+            if (false == _Screen->IsScreenOut(GetPos() + Right))
+            {
+                AddPos(Right);
+            }
+            break;
+        }
+        case 'w':
+        {
+            if (false == _Screen->IsScreenOut(GetPos() + Up))
+            {
+                AddPos(Up);
+            }
+            break;
+        }
+        case 's':
+        {
+            if (false == _Screen->IsScreenOut(GetPos() + Down))
+            {
+                AddPos(Down);
+            }
+        }
+        default:
+        {
+            break;
+        }
+        }
+    }
+
+
+    
+
+#pragma endregion 
 
 protected:
 
