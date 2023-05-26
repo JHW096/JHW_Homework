@@ -26,13 +26,4 @@ int4 int4::operator+(const int4& _Other)
     return Return;
 }
 
-bool int4::operator==(const int4& _Other)
-{
-    int4 MyInt;
-    if (MyInt.X == _Other.X && MyInt.Y == _Other.Y)
-    {
-        return true;
-    }
-    return false;
-}
 

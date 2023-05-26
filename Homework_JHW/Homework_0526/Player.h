@@ -3,6 +3,7 @@
 #include"int4.h"
 
 class ConsoleScreen;
+class Bullet;
 
 class Player : public int4
 {
@@ -30,7 +31,7 @@ public:
 
 	Player(const Player&) = delete;
 
-	void Input(ConsoleScreen* _Screen);
+	void Input(ConsoleScreen* _Screen, Bullet& _Bullet);
 
 private:
 	int4 Pos;

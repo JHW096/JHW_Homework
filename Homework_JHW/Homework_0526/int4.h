@@ -12,8 +12,6 @@ public:
 	void operator+=(const int4& _Other);
 
 	int4 operator+(const int4& _Other);
-
-	bool operator==(const int4& _Other);
 };
 
 const int4 Left = { -1, 0 };

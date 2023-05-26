@@ -67,3 +67,16 @@ void ConsoleScreen::InsertWallPos(int4* _Pos)
     }
     
 }
+
+bool ConsoleScreen::CollisionWall(int4 _Pos)
+{
+    bool check{ false };
+    for (int i = 0; i < GlobalValue::WallCount; i++)
+    {
+        if (_Pos.X == Walls[i].X && _Pos.Y == Walls[i].Y)
+        {
+            check = true;
+        }
+    }
+    return check;
+}

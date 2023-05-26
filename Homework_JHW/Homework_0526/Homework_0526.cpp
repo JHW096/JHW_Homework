@@ -2,6 +2,8 @@
 #include "ConsoleScreen.h"
 #include "Player.h"
 #include "Wall.h"
+#include "Bullet.h"
+#include <Windows.h>
 
 /*
   1 :  .h / .cpp로 분리
@@ -28,28 +30,61 @@ int main()
 
     Wall Walls[GlobalValue::WallCount];
     int4 Wall_pos[GlobalValue::WallCount] = { { 0, 0} };
-    for (int i = 0; i < GlobalValue::WallCount; i++)
+    /*for (int i = 0; i < GlobalValue::WallCount; i++)
     {
         Walls[i].SetPos({ 5, i });
         Wall_pos[i] = Walls[i].GetPos();
-        Screen.InsertWallPos(Wall_pos);
-    }
+    }*/
 
-    int a = 0;
+    Bullet NewBullet;
 
+    int Count = 0;
+    int4 Dir = { 0, 0 };
     while (true)
     {
         Screen.Clear();
 
         for (int i = 0; i < GlobalValue::WallCount; i++)
         {
-            Screen.SetPixel(Walls[i].GetPos(), '#');
+            int4 Pos = { 0 + Count, i };
+            Wall_pos[i] = Pos;
+            Walls[i].SetPos(Pos);
+            Screen.InsertWallPos(Wall_pos);
+            Screen.SetPixel(Wall_pos[i], '#');
         }
+
+        Count++;
+        Dir += NewBullet.GetDir();
+        if (MainPlayer.GetPos().X + Dir.X > GlobalValue::XLine ||
+            MainPlayer.GetPos().Y + Dir.Y > GlobalValue::YLine ||
+            MainPlayer.GetPos().X + Dir.X < 0 ||
+            MainPlayer.GetPos().Y + Dir.Y < 0)
+        {
+            Dir = { 0, 0 };
+        }
+        Screen.SetPixel(MainPlayer.GetPos() + Dir, '@');
+
+
+        if (Count > GlobalValue::XLine - 1)
+        {
+            Count = 0;
+        }
+
+        
+
         Screen.SetPixel(MainPlayer.GetPos(), 'a');
+        
 
         Screen.Print();
+        
 
-        MainPlayer.Input(&Screen);
+        if (_kbhit() != 0)
+        {
+            MainPlayer.Input(&Screen, NewBullet);
+            
+        }
+        
+        Sleep(100);
     }
 }
 

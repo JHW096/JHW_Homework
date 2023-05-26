@@ -24,23 +24,12 @@ public:
 		return Walls;
 	}
 
-	bool CollisionWall(int4 _Pos)
-	{
-		bool check{ false };
-		for (int i = 0; i < GlobalValue::WallCount; i++)
-		{
-			if (_Pos.X == Walls[i].X && _Pos.Y == Walls[i].Y)
-			{
-				check = true;
-			}
-		}
-		return check;
-	}
+	bool CollisionWall(int4 _Pos);
 
 private:
 
 	char BaseCh = ' ';
-	char ArrScreen[GlobalValue::YLine][GlobalValue::XLine + 1] = { };
+	char ArrScreen[GlobalValue::YLine][GlobalValue::XLine + 1] = {};
 	int4 Walls[GlobalValue::WallCount];
 };
 
