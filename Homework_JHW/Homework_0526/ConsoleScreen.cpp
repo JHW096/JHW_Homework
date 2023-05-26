@@ -29,9 +29,9 @@ void ConsoleScreen::Clear()
 
 bool ConsoleScreen::IsScreenOut(const int4& _Pos) const
 {
-    if (_Pos == Wall.GetPos())
+    if (_Pos == IsWall())
     {
-        return true;
+
     }
 
     if (0 > _Pos.X)
@@ -54,9 +54,13 @@ bool ConsoleScreen::IsScreenOut(const int4& _Pos) const
         return true;
     }
 
-
     return false;
 
+}
+
+const int4 ConsoleScreen::IsWall()
+{
+    return wall.GetPos();
 }
 
 void ConsoleScreen::Print() const

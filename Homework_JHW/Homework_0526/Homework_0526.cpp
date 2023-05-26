@@ -21,11 +21,12 @@
 
 int main()
 {
-    ConsoleScreen Screen;
+    Wall Walls[10];
+    ConsoleScreen Screen(Walls);
     Screen.Init('*');
 
     Player MainPlayer;
-    Wall Walls[10];
+    
     // 클래스의경우에는 
     int a = 0;
     int b = 0;
