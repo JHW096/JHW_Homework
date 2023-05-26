@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleScreen.cpp" />
-    <ClCompile Include="Global.cpp" />
     <ClCompile Include="Homework_0526.cpp" />
     <ClCompile Include="int4.cpp" />
     <ClCompile Include="Player.cpp" />

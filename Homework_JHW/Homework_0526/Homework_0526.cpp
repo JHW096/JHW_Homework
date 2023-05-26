@@ -1,9 +1,8 @@
-﻿#include <iostream>
-#include "Player.h"
-#include "int4.h"
+﻿#include "Global.h"
 #include "ConsoleScreen.h"
-#include "Global.h"
+#include "Player.h"
 #include "Wall.h"
+
 /*
   1 :  .h / .cpp로 분리
   2 : 10개의 장애물 배치. (Wall Class)
@@ -21,47 +20,36 @@
 
 int main()
 {
-    Wall Walls[10];
-    ConsoleScreen Screen(Walls);
+    ConsoleScreen Screen;
     Screen.Init('*');
 
     Player MainPlayer;
-    
-    // 클래스의경우에는 
-    int a = 0;
-    int b = 0;
-    MainPlayer.SetPos({ 2, 1 });
-   
-    for (int i = 0; i < Global::WallCount; i++)
+    MainPlayer.SetPos({ 10, 5 });
+
+    Wall Walls[GlobalValue::WallCount];
+    int4 Wall_pos[GlobalValue::WallCount] = { { 0, 0} };
+    for (int i = 0; i < GlobalValue::WallCount; i++)
     {
-        Walls[i].SetPos({ i, i });
+        Walls[i].SetPos({ 5, i });
+        Wall_pos[i] = Walls[i].GetPos();
+        Screen.InsertWallPos(Wall_pos);
     }
 
-   
-    
+    int a = 0;
 
     while (true)
     {
         Screen.Clear();
-        Screen.SetPixel(MainPlayer.GetPos(), 'a');
-        for (int i = 0; i < Global::WallCount; i++)
+
+        for (int i = 0; i < GlobalValue::WallCount; i++)
         {
             Screen.SetPixel(Walls[i].GetPos(), '#');
         }
+        Screen.SetPixel(MainPlayer.GetPos(), 'a');
+
         Screen.Print();
 
         MainPlayer.Input(&Screen);
     }
 }
 
- /* Delta Time 같은 느낌으로다가.
- * #include <windows.h>에 있는 
- * Console.cpp에서 확인.
- if(_kbhit() != 0 ) {
-    입력버퍼가 차있다는 뜻.
- }
-
-    Sleep(200);
-
-
- */
