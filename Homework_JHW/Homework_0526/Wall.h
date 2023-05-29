@@ -5,26 +5,40 @@ class Wall : public int4
 {
 public:
 
+	Wall() :
+		m_Pos()
+	{
+	}
+	Wall(const Wall&) = delete;
+
+
+	//Getter, Setter
+public:
+
 	int4 GetPos() const
 	{
-		return Pos;
+		return this->m_Pos;
+	}
+
+	char GetCh() const
+	{
+		return m_Ch;
 	}
 
 	void SetPos(const int4& _Pos)
 	{
-		Pos = _Pos;
+		m_Pos = _Pos;
 	}
 
-	Wall()
-		: Pos()
-	{
 
-	}
+	//Behavior
+public:
 
-	Wall(const Wall&) = delete;
+	void Destroy(const int4& _Pos);
+
 
 private:
-
-	int4 Pos;
+	int4 m_Pos;
+	char m_Ch = '#';
 };
 

@@ -1,44 +1,63 @@
 #pragma once
+#include "Global.h"
 #include "int4.h"
 
-class Bullet
+class Player;
+class ConsoleScreen;
+
+class Bullet : public int4
 {
 public:
 
-	void init()
+	Bullet() :
+		m_Pos()
 	{
 
 	}
 
-	void UpdatePos(const int4& _Pos)
-	{
-		this->Pos = _Pos;
-	}
+	Bullet(const Bullet& _Other) = delete;
 
-	void UpdateDir()
-	{
+	//Getter, Setter
+public:
 
-	}
-
-	void Fire()
+	int4 GetPos() const
 	{
-		
-	}
-
-	void SetDir(const int4& _Dir)
-	{
-		Dir = _Dir;
+		return m_Pos;
 	}
 
 	int4 GetDir() const
 	{
-		return Dir;
+		return m_Dir;
 	}
 
+	char GetCh() const
+	{
+		return m_Ch;
+	}
+
+	void SetBulletPos(const int4& _Pos)
+	{
+		m_Pos = _Pos;
+	}
+
+	void SetDir(ConsoleScreen* _Screen, const int4& _Pos);
+
+	//Behavior
+public:
+
+	void Init(Player* _Player);
+
+	bool IsBulletFired(ConsoleScreen* _Screen);
+
+	bool IsBulletOut();
+
+	void AddPos(const int4& _Pos);
+
 private:
-	
-	int4 Pos;
-	int4 Dir;
+
+	int4 m_Pos = { 0, 0 };
+	int4 m_Dir;
+	char m_Ch = GlobalValue::Bullet;
 
 };
 

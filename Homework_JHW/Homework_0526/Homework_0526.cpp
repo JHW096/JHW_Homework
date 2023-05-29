@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "Wall.h"
 #include "Bullet.h"
-#include <Windows.h>
 
 /*
   1 :  .h / .cpp로 분리
@@ -17,74 +16,72 @@
 
   7. 크 총알 1발에 벽이 닿으면 벽이 없어지게 만드세요.
 
-
 */
 
 int main()
 {
-    ConsoleScreen Screen;
-    Screen.Init('*');
+    //Create Object
+    ConsoleScreen   Screen;
+    Player          MainPlayer;
+    Bullet          MainBullet;
+    Wall            Walls[GlobalValue::WallCount];
 
-    Player MainPlayer;
+    //Init Object
+    Screen.Init(GlobalValue::Default);
     MainPlayer.SetPos({ 10, 5 });
-
-    Wall Walls[GlobalValue::WallCount];
-    int4 Wall_pos[GlobalValue::WallCount] = { { 0, 0} };
-    /*for (int i = 0; i < GlobalValue::WallCount; i++)
+    MainBullet.Init(&MainPlayer);
+    for (int i = 0; i < GlobalValue::WallCount; i++)
     {
-        Walls[i].SetPos({ 5, i });
-        Wall_pos[i] = Walls[i].GetPos();
-    }*/
+        Walls[i].SetPos({ 5 + i, 2 });
+    }
 
-    Bullet NewBullet;
 
-    int Count = 0;
+    //Move Init Value
     int4 Dir = { 0, 0 };
+    //int Count = 0;
     while (true)
     {
+        //FrameStart, DrwaingStart
         Screen.Clear();
 
+        //Drawing Player
+        Screen.SetPixel(MainPlayer.GetPos(), GlobalValue::Player);
+
+        //Drawing Wall
         for (int i = 0; i < GlobalValue::WallCount; i++)
         {
-            int4 Pos = { 0 + Count, i };
-            Wall_pos[i] = Pos;
-            Walls[i].SetPos(Pos);
-            Screen.InsertWallPos(Wall_pos);
-            Screen.SetPixel(Wall_pos[i], '#');
+            Walls[i].Destroy(MainBullet.GetPos());
+            Screen.SetPixel(Walls[i].GetPos(), Walls[i].GetCh());
         }
 
-        Count++;
-        Dir += NewBullet.GetDir();
-        if (MainPlayer.GetPos().X + Dir.X > GlobalValue::XLine ||
-            MainPlayer.GetPos().Y + Dir.Y > GlobalValue::YLine ||
-            MainPlayer.GetPos().X + Dir.X < 0 ||
-            MainPlayer.GetPos().Y + Dir.Y < 0)
+        //TODO - Wall Move per Frame
+        /*
+            for(int i = 0; i < GlobalValue::WallCount; i++)
+            Screen.SetPixel(Walls[i].GetPos() + i, Walls[i].GetCh());
+        */
+
+        //Drawing and Reset Bullet, 
+        Dir = MainBullet.GetDir();
+        MainBullet.AddPos(Dir);
+        if (MainBullet.IsBulletOut())
         {
             Dir = { 0, 0 };
+            MainBullet.Init(&MainPlayer);
         }
-        Screen.SetPixel(MainPlayer.GetPos() + Dir, '@');
+        Screen.SetPixel(MainBullet.GetPos(), GlobalValue::Bullet);
 
-
-        if (Count > GlobalValue::XLine - 1)
-        {
-            Count = 0;
-        }
-
-        
-
-        Screen.SetPixel(MainPlayer.GetPos(), 'a');
-        
-
+        //FrameEnd, DrawingEnd;
         Screen.Print();
-        
 
+
+        //Wait Keyboard KeyValue, 'Applied only once'
         if (_kbhit() != 0)
         {
-            MainPlayer.Input(&Screen, NewBullet);
-            
+            MainPlayer.Input(&Screen, &MainBullet);
         }
-        
+
         Sleep(100);
     }
+
 }
 

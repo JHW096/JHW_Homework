@@ -2,26 +2,26 @@
 
 void ConsoleScreen::Init(char _BaseCh)
 {
-	BaseCh = _BaseCh;
-	Clear();
+    BaseCh = _BaseCh;
+    Clear();
 }
 
 void ConsoleScreen::SetPixel(const int4& _Pos, char _Ch)
 {
-	ArrScreen[_Pos.Y][_Pos.X] = _Ch;
+    ArrScreen[_Pos.Y][_Pos.X] = _Ch;
 }
 
 void ConsoleScreen::Clear()
 {
-	system("cls");
-	for (size_t y = 0; y < GlobalValue::YLine; y++)
-	{
-		for (size_t x = 0; x < GlobalValue::XLine; x++)
-		{
-			ArrScreen[y][x] = BaseCh;
-		}
-		ArrScreen[y][GlobalValue::XLine] = 0;
-	}
+    system("cls");
+    for (size_t y = 0; y < GlobalValue::YLine; y++)
+    {
+        for (size_t x = 0; x < GlobalValue::XLine; x++)
+        {
+            ArrScreen[y][x] = BaseCh;
+        }
+        ArrScreen[y][GlobalValue::XLine] = 0;
+    }
 }
 
 bool ConsoleScreen::IsScreenOut(const int4& _Pos) const
@@ -59,24 +59,24 @@ void ConsoleScreen::Print() const
     }
 }
 
-void ConsoleScreen::InsertWallPos(int4* _Pos)
-{
-    for (int i = 0; i < GlobalValue::WallCount; i++)
-    {
-        Walls[i] = _Pos[i];
-    }
-    
-}
 
-bool ConsoleScreen::CollisionWall(int4 _Pos)
+bool ConsoleScreen::FindPixel(char _Ch)
 {
-    bool check{ false };
-    for (int i = 0; i < GlobalValue::WallCount; i++)
+    if (_Ch == '\0')
     {
-        if (_Pos.X == Walls[i].X && _Pos.Y == Walls[i].Y)
+        return false;
+    }
+    for (int i = 0; i < GlobalValue::YLine; i++)
+    {
+        for (int j = 0; j < GlobalValue::XLine; j++)
         {
-            check = true;
+            if (ArrScreen[i][j] == _Ch)
+            {
+                return true;
+            }
         }
     }
-    return check;
+    return false;
 }
+
+

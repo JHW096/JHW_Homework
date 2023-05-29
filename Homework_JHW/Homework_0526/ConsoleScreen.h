@@ -17,19 +17,14 @@ public:
 
 	void Print() const;
 
-	void InsertWallPos(int4* _Pos);
+	bool FindPixel(char _Ch);
 
-	int4* GetWallPos()
-	{
-		return Walls;
-	}
 
-	bool CollisionWall(int4 _Pos);
 
 private:
 
 	char BaseCh = ' ';
 	char ArrScreen[GlobalValue::YLine][GlobalValue::XLine + 1] = {};
-	int4 Walls[GlobalValue::WallCount];
+
 };
 
